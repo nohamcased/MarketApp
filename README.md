@@ -23,12 +23,14 @@ print('Total number of apps in the dataset = ', len(apps))
 n = 5
 apps.sample(n) 
 ```
+<img width="760" alt="Screen Shot 2023-04-09 at 18 59 08" src="https://user-images.githubusercontent.com/86967515/230803798-6b18cc25-e489-47b9-8fb9-0edf3bfb51cc.png">
+<img width="760" alt="Screen Shot 2023-04-09 at 18 59 24" src="https://user-images.githubusercontent.com/86967515/230803803-7b67acd0-498b-4350-a0a5-7a5f55888017.png">
+
 
 ## 2. Data cleaning
-<p>Data cleaning is one of the most essential subtask any data science project. Although it can be a very tedious process, it's worth should never be undermined.</p>
 <p>By looking at a random sample of the dataset rows (from the above task), we observe that some entries in the columns like <code>Installs</code> and <code>Price</code> have a few special characters (<code>+</code> <code>,</code> <code>$</code>) due to the way the numbers have been represented. This prevents the columns from being purely numeric, making it difficult to use them in subsequent future mathematical calculations. Ideally, as their names suggest, we would want these columns to contain only digits from [0-9].</p>
-<p>Hence, we now proceed to clean our data. Specifically, the special characters <code>,</code> and <code>+</code> present in <code>Installs</code> column and <code>$</code> present in <code>Price</code> column need to be removed.</p>
-<p>It is also always a good practice to print a summary of your dataframe after completing data cleaning. We will use the <code>info()</code> method to acheive this.</p>
+<p>Hence, I now proceed to clean our data. Specifically, the special characters <code>,</code> and <code>+</code> present in <code>Installs</code> column and <code>$</code> present in <code>Price</code> column need to be removed.</p>
+<p>It is also always a good practice to print a summary of your dataframe after completing data cleaning. I will use the <code>info()</code> method to acheive this.</p>
 
 ```
 # List of characters to remove
@@ -46,6 +48,7 @@ for col in cols_to_clean:
 # Print a summary of the apps dataframe
 print(apps.info())
 ```
+<img width="368" alt="Screen Shot 2023-04-09 at 19 00 14" src="https://user-images.githubusercontent.com/86967515/230803918-f0651cd9-bfdf-45be-afc6-4571d9fb1373.png">
 
 ## 3. Correcting data types
 <p>From the previous task we noticed that <code>Installs</code> and <code>Price</code> were categorized as <code>object</code> data type (and not <code>int</code> or <code>float</code>) as we would like. This is because these two columns originally had mixed input types: digits and special characters. To know more about Pandas data types, read <a href="https://datacarpentry.org/python-ecology-lesson/04-data-types-and-format/">this</a>.</p>
@@ -63,6 +66,7 @@ apps['Price'] = apps['Price'].astype(float)
 # Checking dtypes of the apps dataframe
 print(apps.dtypes)
 ```
+<img width="368" alt="Screen Shot 2023-04-09 at 19 00 43" src="https://user-images.githubusercontent.com/86967515/230803930-ec5e7313-f41d-432f-8e0b-f73df5c0fc55.png">
 
 ## 4. Exploring app categories
 <p>With more than 1 billion active users in 190 countries around the world, Google Play continues to be an important distribution platform to build a global audience. For businesses to get their apps in front of users, it's important to make them more quickly and easily discoverable on Google Play. To improve the overall search experience, Google has introduced the concept of grouping apps into categories.</p>
@@ -96,6 +100,7 @@ data = [go.Bar(
 
 plotly.offline.iplot(data)
 ```
+<img width="745" alt="Screen Shot 2023-04-09 at 19 01 37" src="https://user-images.githubusercontent.com/86967515/230803934-6a11bd59-0e8b-41b2-9914-ecb78cbad7a4.png">
 
 ## 5. Distribution of app ratings
 <p>After having witnessed the market share for each category of apps, let's see how all these apps perform on an average. App ratings (on a scale of 1 to 5) impact the discoverability, conversion of apps as well as the company's overall brand image. Ratings are a key performance indicator of an app.</p>
@@ -124,6 +129,7 @@ layout = {'shapes': [{
 
 plotly.offline.iplot({'data': data, 'layout': layout})
 ```
+<img width="707" alt="Screen Shot 2023-04-09 at 19 02 10" src="https://user-images.githubusercontent.com/86967515/230804095-cd470fe2-e185-49f7-829c-56f646544d53.png">
 
 ## 6. Size and price of an app
 <p>Let's now examine app size and app price. For size, if the mobile app is too large, it may be difficult and/or expensive for users to download. Lengthy download times could turn users off before they even experience your mobile app. Plus, each user's device has a finite amount of disk space. For price, some users expect their apps to be free or inexpensive. These problems compound if the developing world is part of your target market; especially due to internet speeds, earning power and exchange rates.</p>
@@ -159,6 +165,8 @@ paid_apps = apps_with_size_and_rating_present[apps_with_size_and_rating_present[
 # Plot price vs. rating
 plt2 = sns.jointplot(x = paid_apps['Price'], y = paid_apps['Rating'])
 ```
+<img width="652" alt="Screen Shot 2023-04-09 at 19 02 53" src="https://user-images.githubusercontent.com/86967515/230804097-e6b3a525-4014-4edb-8eb0-e0fb902805da.png">
+<img width="595" alt="Screen Shot 2023-04-09 at 19 04 18" src="https://user-images.githubusercontent.com/86967515/230804217-4d2aadb4-aab3-4eed-98f6-92d93f014ff7.png">
 
 ## 7. Relation between app category and app price
 <p>So now comes the hard part. How are companies and developers supposed to make ends meet? What monetization strategies can companies use to maximize profit? The costs of apps are largely based on features, complexity, and platform.</p>
@@ -182,6 +190,8 @@ ax.set_title('App pricing trend across categories')
 apps_above_200 = popular_app_cats[popular_app_cats['Price'] > 200]
 apps_above_200[['Category', 'App', 'Price']]
 ```
+<img width="983" alt="Screen Shot 2023-04-09 at 19 05 15" src="https://user-images.githubusercontent.com/86967515/230804372-d5351e85-7332-404e-8942-98bb519c73f4.png">
+<img width="976" alt="Screen Shot 2023-04-09 at 19 06 06" src="https://user-images.githubusercontent.com/86967515/230804378-d1479da4-725b-43ed-afa5-4db4b2b9867d.png">
 
 ## 8. Filter out "junk" apps
 <p>It looks like a bunch of the really expensive apps are "junk" apps. That is, apps that don't really have a purpose. Some app developer may create an app called <em>I Am Rich Premium</em> or <em>most expensive app (H)</em> just for a joke or to test their app development skills. Some developers even do this with malicious intent and try to make money by hoping people accidentally click purchase on their app in the store.</p>
@@ -198,6 +208,7 @@ fig.set_size_inches(15, 8)
 ax = sns.stripplot(x = apps_under_100['Price'], y = apps_under_100['Category'], jitter = True, linewidth = 1)
 ax.set_title('App pricing trend across categories after filtering for junk apps')
 ```
+<img width="976" alt="Screen Shot 2023-04-09 at 19 06 36" src="https://user-images.githubusercontent.com/86967515/230804413-c04e42ce-2982-49ce-9dad-68beb54e1b75.png">
 
 ## 9. Popularity of paid apps vs free apps
 <p>For apps in the Play Store today, there are five types of pricing strategies: free, freemium, paid, paymium, and subscription. Let's focus on free and paid apps only. Some characteristics of free apps are:</p>
@@ -238,6 +249,7 @@ layout = go.Layout(
 data = [trace0, trace1]
 plotly.offline.iplot({'data': data, 'layout': layout})
 ```
+<img width="976" alt="Screen Shot 2023-04-09 at 19 07 07" src="https://user-images.githubusercontent.com/86967515/230804433-9e617724-cf50-4b01-b104-9aad53324684.png">
 
 ## 10. Sentiment analysis of user reviews
 <p>Mining user review data to determine how people feel about your product, brand, or service can be done using a technique called sentiment analysis. User reviews for apps can be analyzed to identify if the mood is positive, negative or neutral about that app. For example, positive words in an app review might include words such as 'amazing', 'friendly', 'good', 'great', and 'love'. Negative words might be words like 'malware', 'hate', 'problem', 'refund', and 'incompetent'.</p>
@@ -262,3 +274,4 @@ fig.set_size_inches(11, 8)
 ax = sns.boxplot(x = 'Type', y = 'S', data = merged_df)
 ax.set_title('Sentiment Polarity Distribution')
 ```
+<img width="959" alt="Screen Shot 2023-04-09 at 19 14 08" src="https://user-images.githubusercontent.com/86967515/230804438-fbc00262-2e09-48f5-bd16-23f796a3d0ad.png">
